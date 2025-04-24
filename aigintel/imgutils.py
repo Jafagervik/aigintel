@@ -1,4 +1,5 @@
 import os
+
 import matplotlib.pyplot as plt
 from tinygrad import Tensor
 
@@ -84,4 +85,3 @@ def plot_metrics(
         plt.show()
     else:
         plt.close()
-

@@ -1,9 +1,9 @@
-import os
-import logging
-import random as rnd
 import argparse
-import yaml
+import logging
+import os
+import random as rnd
 
+import yaml
 from tinygrad import Tensor, nn
 from tinygrad.nn.optim import Optimizer
 from tinygrad.nn.state import load_state_dict, safe_load, safe_save
@@ -15,6 +15,7 @@ def load_config(path: str) -> dict:
     """Loads hyperparameters from a YAML file."""
     with open(path) as f:
         return yaml.safe_load(f)
+
 
 def select_optimizer(model: BaseModel, config: dict) -> Optimizer:
     """Selects optimizer based on hyperparameters."""
@@ -29,11 +30,13 @@ def select_optimizer(model: BaseModel, config: dict) -> Optimizer:
             logging.error("Optimizer is not supported.")
             raise NotImplementedError
 
+
 def save_model(model: BaseModel, model_name: str):
     """Saving model to checkpoints"""
     path = os.path.join(os.getcwd(), "checkpoints", f"{model_name.lower()}.safetensors")
     safe_save(nn.state.get_state_dict(model), path)
     logging.debug(f"Saving model {model_name} to {path}")
+
 
 def load_model(model: BaseModel, model_name: str):
     """Loading model from safetensors file"""
@@ -41,10 +44,12 @@ def load_model(model: BaseModel, model_name: str):
     load_state_dict(model, safe_load(path))
     logging.debug(f"Model loaded from {path}")
 
+
 def seed_all(seed: int = 1337):
     Tensor.manual_seed(seed)
     rnd.seed(seed)
     logging.info(f"Seed set to {seed}")
+
 
 def parse_args():
     """Parse command line arguments"""
@@ -78,3 +83,4 @@ def parse_args():
     )
 
     return parser.parse_args()
+

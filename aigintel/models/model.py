@@ -1,6 +1,7 @@
-from typing import List, Callable
+from typing import Callable, List
 
 from tinygrad import Tensor, nn
+
 from aigintel.models.basemodel import BaseModel
 
 

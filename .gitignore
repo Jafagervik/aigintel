@@ -1,5 +1,6 @@
 # Python virtual environment
 venv/
+.venv/
 .env/
 
 # Python bytecode and cache
@@ -10,6 +11,8 @@ __pycache__/
 
 # uv-specific files
 uv.lock
+
+.ruff_cache/
 
 # Model checkpoints (if you don't want to track them)
 checkpoints/

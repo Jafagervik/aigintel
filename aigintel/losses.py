@@ -33,4 +33,3 @@ def total_correlation_loss(z: Tensor, q_z: Tensor) -> Tensor:
     log_q_z_product = (q_z.log()).sum(axis=-1)
     log_q_z = q_z.mean(axis=0).log()
     return (log_q_z - log_q_z_product).mean().realize()
-

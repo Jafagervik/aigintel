@@ -1,6 +1,7 @@
-from typing import List, Callable
+from typing import Callable, List
 
 from tinygrad import Tensor, nn
+
 from aigintel.models.basemodel import BaseModel
 
 
@@ -27,4 +28,3 @@ class ExampleModel(BaseModel):
 
     def __call__(self, x: Tensor) -> Tensor:
         return x.sequential(self.layers)
-
