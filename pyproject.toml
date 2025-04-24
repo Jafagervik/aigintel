@@ -1,0 +1,20 @@
+[project]
+name = "aigintel"
+version = "0.1.0"
+authors = ["Jørgen A. Fagervik"]
+description = "AI workshop for Gintel Tech Day"
+requires-python = ">=3.13"
+dependencies = [
+    "argparse>=1.4.0",
+    "matplotlib>=3.10.1",
+    "pyyaml>=6.0.2",
+    "tinygrad>=0.10.2",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+indent-width = 4

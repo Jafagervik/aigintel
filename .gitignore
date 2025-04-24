@@ -1,0 +1,25 @@
+# Python virtual environment
+venv/
+.env/
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# uv-specific files
+uv.lock
+
+# Model checkpoints (if you don't want to track them)
+checkpoints/
+
+# Common editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Miscellaneous
+*.log
+.DS_Store

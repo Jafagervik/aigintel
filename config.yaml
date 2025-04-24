@@ -1,0 +1,18 @@
+seed: 420
+width: 28
+height: 28
+layers: [784, 128, 10]
+epochs: 5
+fashion: true
+batch_size: 64
+
+optimizer:
+  name: 'adam' # or sgd
+  lr: 0.001
+  b1: 0.01
+  b2: 0.02
+  momentum: 0.5
+
+early_stopping:
+  patience: 5
+  min_delta: 0.01
