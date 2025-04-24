@@ -42,14 +42,12 @@ def shuffle_batch(x_train: Tensor, y_train: Tensor) -> (Tensor, Tensor):
 def train(model: BaseModel, config: dict, args: Namespace):
     """Training our latest and greatest AI model"""
     if args.load:
-        # Transfer learning
         load_model(model, model.name, args.debug)
 
     optim = select_optimizer(model, config["optimizer"])
 
     x_train, y_train, x_test, y_test = mnist(fashion=config["fashion"])
 
-    # Batching parameters
     batch_size = config.get("batch_size", 64)  # Default to 64 if not specified in config
     num_batches = x_train.shape[0] // batch_size  # Number of batches (e.g., 60000 // 64 ≈ 937)
 
@@ -62,8 +60,8 @@ def train(model: BaseModel, config: dict, args: Namespace):
         config["early_stopping"]["min_delta"],
     )
 
-    losses = [0 for _ in range(config["epochs"])]
-    epoch_durations = [0 for _ in range(config["epochs"])]
+    losses = [0] ** config["epochs"]
+    epoch_durations = [0] ** config["epochs"]
 
     # with Tensor.train():
     for i in (t := trange(config["epochs"])):
