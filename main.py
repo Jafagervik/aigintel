@@ -16,12 +16,9 @@ def main():
 
     seed_all(config["seed"])
 
-
     logging.info("Training..." if args.train else "Inference...")
-
     logging.debug(f"Default device is {Device.DEFAULT}")
 
-    #model = LinearNet(config["layers"])
     model = LinearNet()
 
     if args.load:

@@ -2,7 +2,7 @@ import logging
 import time
 from argparse import Namespace
 
-from tinygrad import TinyJit, Tensor, nn
+from tinygrad import TinyJit, Tensor
 from tinygrad.helpers import trange
 from tinygrad.nn.datasets import mnist
 from tinygrad.nn.optim import Optimizer
@@ -11,6 +11,7 @@ from aigintel.early_stopping import EarlyStopping
 from aigintel.imgutils import plot_metrics
 from aigintel.models.basemodel import BaseModel
 from aigintel.utils import save_model, load_model, select_optimizer
+
 import numpy as np
 
 @TinyJit
