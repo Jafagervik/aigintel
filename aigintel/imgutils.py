@@ -13,7 +13,6 @@ def show_img(data: Tensor, index: int, show: bool = True, save: bool = False):
     plt.axis("off")
 
     if save: plt.savefig(f"images/{index}.png")
-
     if show: plt.show()
 
 def plot_metrics(values, title="Loss", xlabel="Epoch", ylabel="Value", save=True, show=True,
@@ -23,26 +22,21 @@ def plot_metrics(values, title="Loss", xlabel="Epoch", ylabel="Value", save=True
 
     fig, ax = plt.subplots(figsize=figsize, facecolor='#f9f9f9')
 
-    # Plot the main line with a gradient fill
     epochs = range(1, len(values) + 1)
     ax.plot(epochs, values, color=color, lw=2.5, zorder=5)
     ax.fill_between(epochs, values, alpha=0.2, color=color, zorder=4)
 
-    # Add markers at each data point
     ax.scatter(epochs, values, color=marker_color, s=60, zorder=6, alpha=0.8,
                edgecolor='white', linewidth=1.5)
 
-    # Customize the appearance
     ax.set_title(title, fontsize=16, fontweight='bold', pad=15)
     ax.set_xlabel(xlabel, fontsize=12, labelpad=10)
     ax.set_ylabel(ylabel, fontsize=12, labelpad=10)
 
-    # Customize grid and spines
     ax.grid(True, linestyle='--', alpha=0.7)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
-    # Add a subtle text annotation with the min/max values
     min_val = min(values)
     max_val = max(values)
     min_idx = values.index(min_val) + 1
@@ -53,7 +47,6 @@ def plot_metrics(values, title="Loss", xlabel="Epoch", ylabel="Value", save=True
                 textcoords='offset points', fontsize=9,
                 arrowprops=dict(arrowstyle='->', color='gray', alpha=0.7))
 
-    # Only annotate max if it's different from min (for accuracy it might be the most important)
     if max_val != min_val:
         ax.annotate(f'Max: {max_val:.4f} (Epoch {max_idx})',
                     xy=(max_idx, max_val), xytext=(10, 30),
@@ -63,7 +56,7 @@ def plot_metrics(values, title="Loss", xlabel="Epoch", ylabel="Value", save=True
     plt.tight_layout()
 
     if save:
-        os.makedirs("images", exist_ok=True)  # Create images directory if it doesn't exist
+        os.makedirs("images", exist_ok=True)
         plt.savefig(f"images/{title.lower().replace(' ', '_')}.png", dpi=300, bbox_inches='tight')
 
     if show:
