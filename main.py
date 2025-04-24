@@ -1,4 +1,4 @@
-from typing import List
+import logging
 
 from tinygrad import Device
 
@@ -11,20 +11,20 @@ from aigintel.utils import load_config, seed_all
 
 def main():
     args = utils.parse_args()
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
     config = load_config("config.yaml")
 
     seed_all(config["seed"])
 
-    print("Training..." if args.train else "Inference...")
 
-    if args.debug:
-        print(f"Default device is {Device.DEFAULT}")
+    logging.info("Training..." if args.train else "Inference...")
+
+    logging.debug(f"Default device is {Device.DEFAULT}")
 
     #model = LinearNet(config["layers"])
     model = LinearNet()
 
     if args.load:
-
         load_config("config.yaml")
 
     if args.train:

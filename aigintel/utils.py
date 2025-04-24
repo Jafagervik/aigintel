@@ -1,4 +1,5 @@
 import os
+import logging
 import random as rnd
 
 import argparse
@@ -26,26 +27,25 @@ def select_optimizer(model: BaseModel, config: dict) -> Optimizer:
         case "adamw":
             return nn.optim.AdamW(nn.state.get_parameters(model), lr=config["lr"])
         case _:
-            print("Optimizer is not supported.")
+            logging.error("Optimizer is not supported.")
             raise NotImplementedError
 
-def save_model(model: BaseModel, model_name: str, show = False):
+def save_model(model: BaseModel, model_name: str):
     """Saving model to checkpoints"""
     path = os.path.join(os.getcwd(), "checkpoints", f"{model_name.lower()}.safetensors")
     safe_save(nn.state.get_state_dict(model), path)
-    if show: print(f"Saving model {model_name} to {path}")
+    logging.debug(f"Saving model {model_name} to {path}")
 
-def load_model(model: BaseModel, model_name: str, show = True):
+def load_model(model: BaseModel, model_name: str):
     """Loading model from safetensors file"""
     path = os.path.join(os.getcwd(), "checkpoints", f"{model_name.lower()}.safetensors")
     load_state_dict(model, safe_load(path))
-    if show: print(f"Model loaded from {path}")
+    logging.debug(f"Model loaded from {path}")
 
 def seed_all(seed: int = 1337):
     Tensor.manual_seed(seed)
     rnd.seed(seed)
-    # TODO: numpy seeding
-    print(f"Seed set to {seed}")
+    logging.info(f"Seed set to {seed}")
 
 def parse_args():
     """Parse command line arguments"""
