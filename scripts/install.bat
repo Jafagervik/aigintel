@@ -1,8 +1,26 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-REM Repository URL (replace with your actual repo URL)
-set REPO_URL=<repository-url>
+REM Step 0: Check if Python 3.13 is installed
+python --version 2>nul | findstr /C:"3.13" >nul
+if %ERRORLEVEL% NEQ 0 (
+    echo Python 3.13 not found. Downloading and installing Python 3.13...
+    REM Download Python 3.13 installer
+    curl -o python-installer.exe https://www.python.org/ftp/python/3.13.0/python-3.13.0-amd64.exe
+
+    REM Install Python 3.13 silently and add to PATH
+    echo Installing Python 3.13...
+    python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
+
+    REM Clean up
+    del python-installer.exe
+) else (
+    echo Python 3.13 is already installed.
+)
+
+
+REM Repository URL
+set REPO_URL=https://github.com/Jafagervik/aigintel.git
 for %%f in (%REPO_URL%) do set REPO_NAME=%%~nxf
 set REPO_NAME=%REPO_NAME:.git=%
 
