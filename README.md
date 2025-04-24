@@ -1,10 +1,20 @@
 # GINTEL AI WORKSHOP
 
 ## Setup 
-- Install Python 3.13
-- Install Pycharm if missing
-- Install UV and Ruff plugin
 
+### Windows
+
+```terminal
+scripts\install.bat
+```
+
+### Mac
+
+```shell
+chmod +x scripts/install.sh && scripts/install.sh
+```
+
+Install Ruff plugin in Pycharm afterwards
 
 ## Set up Pycharm
 
