@@ -13,6 +13,12 @@ dependencies = [
 
 [tool.ruff]
 line-length = 120
+indent-width = 4
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E701"]
 
 [tool.ruff.format]
 quote-style = "double"

@@ -4,7 +4,7 @@
 set -e
 
 # Step 0: Install pyenv if not already installed
-if ! command -v pyenv &> /dev/null; then
+if ! command -v pyenv &>/dev/null; then
     echo "Installing pyenv..."
     curl https://pyenv.run | bash
 
@@ -50,7 +50,7 @@ fi
 cd "$REPO_NAME"
 
 # Step 2: Install uv if not already installed
-if ! command -v uv &> /dev/null; then
+if ! command -v uv &>/dev/null; then
     echo "Installing uv..."
     curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
