@@ -3,7 +3,7 @@ import logging
 from tinygrad import Device
 
 from aigintel import utils
-from aigintel.inference import run
+from aigintel.inference import run_multiple
 from aigintel.models.model import LinearNet
 from aigintel.train import train
 from aigintel.utils import load_config, seed_all
@@ -19,6 +19,7 @@ def main():
     logging.info("Training..." if args.train else "Inference...")
     logging.debug(f"Default device is {Device.DEFAULT}")
 
+    # TODO: Replace with your net
     model = LinearNet()
 
     load_config("config.yaml")
@@ -26,7 +27,8 @@ def main():
     if args.train:
         train(model, config, args)
     else:
-        run(model, None, config, args)
+        run_multiple(model, config, args)
+        # run(model, config, args)
 
 
 if __name__ == "__main__":

@@ -4,19 +4,14 @@ import matplotlib.pyplot as plt
 from tinygrad import Tensor
 
 
-def show_img(data: Tensor, index: int, show: bool = True, save: bool = False):
+def show_img(data: Tensor, show: bool = True, save: bool = False):
     """Open a specific image from a tensor"""
-    if index < 0 or index >= data.shape[0]:
-        raise ValueError("Index out of range")
-
-    single_image = data[index]
-
-    imate_np = single_image.numpy().squeeze()
+    imate_np = data.numpy().squeeze()
     plt.imshow(imate_np, cmap="gray")
     plt.axis("off")
 
     if save:
-        plt.savefig(f"images/{index}.png")
+        plt.savefig("images/test.png")
     if show:
         plt.show()
 

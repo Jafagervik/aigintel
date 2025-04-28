@@ -12,8 +12,6 @@ from aigintel.early_stopping import EarlyStopping
 from aigintel.imgutils import plot_metrics
 from aigintel.models.basemodel import BaseModel
 from aigintel.utils import (
-    load_model,
-    save_model,
     select_optimizer,
 )
 
@@ -42,7 +40,7 @@ def shuffle_batch(x_train: Tensor, y_train: Tensor) -> (Tensor, Tensor):
 def train(model: BaseModel, config: dict, args: Namespace):
     """Training our latest and greatest AI model"""
     if args.load:
-        load_model(model, model.name, args.debug)
+        model.load()
 
     optim = select_optimizer(model, config["optimizer"])
 
@@ -94,7 +92,7 @@ def train(model: BaseModel, config: dict, args: Namespace):
         if avg_loss < best_loss:
             best_loss = avg_loss
             best_epoch = i
-            save_model(model, "LinearNet")
+            model.save()
 
         if es(avg_loss):
             logging.warn(f"Stopping early at epoch {i + 1} since we're not experiencing meaningful decrease of loss")

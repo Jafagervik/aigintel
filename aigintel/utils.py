@@ -2,17 +2,19 @@ import argparse
 import logging
 import os
 import random as rnd
+from typing import List
 
 import yaml
 from tinygrad import Tensor, nn
 from tinygrad.nn.optim import Optimizer
-from tinygrad.nn.state import load_state_dict, safe_load, safe_save
+from tinygrad.nn.state import load_state_dict, safe_load
 
 from aigintel.models.basemodel import BaseModel
 
 
 def load_config(path: str) -> dict:
     """Loads hyperparameters from a YAML file."""
+    logging.info("Loading hyperparameters")
     with open(path) as f:
         return yaml.safe_load(f)
 
@@ -29,13 +31,6 @@ def select_optimizer(model: BaseModel, config: dict) -> Optimizer:
         case _:
             logging.error("Optimizer is not supported.")
             raise NotImplementedError
-
-
-def save_model(model: BaseModel, model_name: str):
-    """Saving model to checkpoints"""
-    path = os.path.join(os.getcwd(), "checkpoints", f"{model_name.lower()}.safetensors")
-    safe_save(nn.state.get_state_dict(model), path)
-    logging.debug(f"Saving model {model_name} to {path}")
 
 
 def load_model(model: BaseModel, model_name: str):
@@ -78,9 +73,13 @@ def parse_args():
         "-t",
         dest="train",
         action="store_true",
-        help="Training: True, Inference: False",
-        default=True,
+        help="Train mode or inference",
+        default=False,
     )
 
     return parser.parse_args()
 
+
+def load_fashion_mnist_class_names() -> List[str]:
+    with open("labels.txt", "r") as f:
+        return [line.strip() for line in f.readlines()]
