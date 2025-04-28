@@ -21,14 +21,11 @@ def main():
 
     model = LinearNet()
 
-    if args.load:
-        load_config("config.yaml")
+    load_config("config.yaml")
 
     if args.train:
-        # Training
         train(model, config, args)
     else:
-        # Inference
         run(model, None, config, args)
 
 

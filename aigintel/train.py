@@ -60,8 +60,8 @@ def train(model: BaseModel, config: dict, args: Namespace):
         config["early_stopping"]["min_delta"],
     )
 
-    losses = [0] ** config["epochs"]
-    epoch_durations = [0] ** config["epochs"]
+    losses = [0] * config["epochs"]
+    epoch_durations = [0] * config["epochs"]
 
     # with Tensor.train():
     for i in (t := trange(config["epochs"])):
