@@ -17,6 +17,21 @@ chmod +x scripts/install.sh && scripts/install.sh
 Install Ruff plugin in Pycharm afterwards
 
 
+## Setup
+
+### Create virtual environment
+uv venv
+
+### Activate the virtual environment
+#### On Windows:
+.venv\Scripts\activate
+#### On macOS/Linux:
+source .venv/bin/activate
+
+# Install dependencies using uv sync
+uv sync
+
+
 ## Running
 
 
