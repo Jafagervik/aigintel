@@ -36,7 +36,7 @@ def run_multiple(model: BaseModel, config: Dict, args: Namespace, show: bool = F
 
     fash = load_fashion_mnist_class_names()
 
-    _, _, xt, yt = mnist(fashion=True)
+    _, _, xt, yt = mnist(fashion=config["fashion"])
 
     for i in range(1, 10):
         first = xt[i].unsqueeze(0)

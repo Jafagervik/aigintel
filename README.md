@@ -16,12 +16,10 @@ chmod +x scripts/install.sh && scripts/install.sh
 
 Install Ruff plugin in Pycharm afterwards
 
-## Set up Pycharm
-
-- Debug
-- Inference 
-- Debug w/ transfer learning
 
 ## Running
 
-- Click play on the inference button
+
+- Debug: uv run main.py --train --debug
+- Debug w/ transfer learning: uv run main.py --train --debug --load
+- Inference: uv run main.py
