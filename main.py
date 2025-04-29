@@ -4,7 +4,7 @@ from tinygrad import Device
 
 from aigintel import utils
 from aigintel.inference import run_multiple
-from aigintel.models.model import LinearNet
+from aigintel.models.example_model import TinyNet
 from aigintel.train import train
 from aigintel.utils import load_config, seed_all
 
@@ -20,7 +20,8 @@ def main():
     logging.debug(f"Default device is {Device.DEFAULT}")
 
     # TODO: Replace with your net
-    model = LinearNet()
+    model = TinyNet()
+    # model = LinearNet()
 
     load_config("config.yaml")
 

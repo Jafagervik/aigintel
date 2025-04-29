@@ -1,30 +1,17 @@
-from typing import Callable, List
-
-from tinygrad import Tensor, nn
+from tinygrad.nn import Linear
+from tinygrad.tensor import Tensor
 
 from aigintel.models.basemodel import BaseModel
 
 
-class ExampleModel(BaseModel):
-    """Example model for AI"""
-
+class TinyNet(BaseModel):
     def __init__(self):
-        self.layers: List[Callable[[Tensor], Tensor]] = [
-            nn.Conv2d(1, 32, 5),
-            Tensor.relu,
-            nn.Conv2d(32, 32, 5),
-            Tensor.relu,
-            nn.BatchNorm(32),
-            Tensor.max_pool2d,
-            nn.Conv2d(32, 64, 3),
-            Tensor.relu,
-            nn.Conv2d(64, 64, 3),
-            Tensor.relu,
-            nn.BatchNorm(64),
-            Tensor.max_pool2d,
-            lambda x: x.flatten(1),
-            nn.Linear(576, 10),
-        ]
+        self.l1 = Linear(784, 128, bias=False)
+        self.l2 = Linear(128, 10, bias=False)
 
     def __call__(self, x: Tensor) -> Tensor:
-        return x.sequential(self.layers)
+        x = x.flatten(1)
+        x = self.l1(x)
+        x = x.leakyrelu()
+        x = self.l2(x)
+        return x
