@@ -47,7 +47,10 @@ class BaseModel:
 
     def save(self):
         """Saving model to checkpoints"""
-        path = os.path.join(os.getcwd(), "checkpoints", f"{self.name.lower()}.safetensors")
+        checkpoint_dir = os.path.join(os.getcwd(), "checkpoints")
+        os.makedirs(checkpoint_dir, exist_ok=True)
+
+        path = os.path.join(checkpoint_dir, f"{self.name.lower()}.safetensors")
         safe_save(self.state_dict(), path)
         logging.debug(f"Saving model {self.name.lower()} to {path}")
 

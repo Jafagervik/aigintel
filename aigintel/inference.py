@@ -31,7 +31,7 @@ def run(model: BaseModel, config: Dict, args: Namespace, show: bool = False):
 
 
 def run_multiple(model: BaseModel, config: Dict, args: Namespace, show: bool = False):
-    """Runs a single forward pass through loaded model"""
+    """Runs a multiple forward passes through loaded model"""
     model.load()
 
     fash = load_fashion_mnist_class_names()

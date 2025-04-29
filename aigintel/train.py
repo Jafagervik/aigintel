@@ -61,7 +61,6 @@ def train(model: BaseModel, config: dict, args: Namespace):
     losses = [0] * config["epochs"]
     epoch_durations = [0] * config["epochs"]
 
-    # with Tensor.train():
     for i in (t := trange(config["epochs"])):
         # Shuffle data at the start of each epoch
         x_train, y_train = shuffle_batch(x_train, y_train)
