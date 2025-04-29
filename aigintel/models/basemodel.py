@@ -1,5 +1,6 @@
 import logging
 import os
+import uuid
 from abc import abstractmethod
 from typing import List
 
@@ -50,9 +51,10 @@ class BaseModel:
         checkpoint_dir = os.path.join(os.getcwd(), "checkpoints")
         os.makedirs(checkpoint_dir, exist_ok=True)
 
-        path = os.path.join(checkpoint_dir, f"{self.name.lower()}.safetensors")
-        safe_save(self.state_dict(), path)
-        logging.debug(f"Saving model {self.name.lower()} to {path}")
+        path = os.path.join(checkpoint_dir, f"{self.name.lower()}")
+        upath = f"{path}_{uuid.uuid4().hex}.safetensors"
+        safe_save(self.state_dict(), upath)
+        logging.debug(f"Saving model {self.name.lower()} to {upath}")
 
     def load(self):
         """Loading model from safetensors file"""

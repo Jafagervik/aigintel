@@ -60,6 +60,7 @@ def train(model: BaseModel, config: dict, args: Namespace):
 
     losses = [0] * config["epochs"]
     epoch_durations = [0] * config["epochs"]
+    acts = []
 
     for i in (t := trange(config["epochs"])):
         # Shuffle data at the start of each epoch
@@ -84,6 +85,7 @@ def train(model: BaseModel, config: dict, args: Namespace):
 
         if i % 2 == 0:
             test_acc = get_test_acc(model, x_test, y_test).item()
+            acts.append(test_acc)
             t.set_description(f"Epoch {i + 1} | Avg Loss = {avg_loss:.4f} | Acc = {test_acc:.2f}%")
         else:
             t.set_description(f"Epoch {i + 1} | Avg Loss = {avg_loss:.4f}")
@@ -99,4 +101,5 @@ def train(model: BaseModel, config: dict, args: Namespace):
 
     logging.info(f"Best loss: {best_loss:.4f} at epoch {best_epoch}")
     plot_metrics(losses)
+    plot_metrics(acts, "Accuracy", "Epoch", "Value")
     plot_metrics(epoch_durations, "Duration", "Epoch", "Seconds")
